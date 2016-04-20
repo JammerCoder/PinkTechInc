@@ -57,6 +57,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\PinkTechIncHeaderImage.png" />
+    <Content Include="PinkTechIncSiteMaster1.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -68,8 +70,15 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PinkTechIncSiteMaster1.Master.cs">
+      <DependentUpon>PinkTechIncSiteMaster1.Master</DependentUpon>
+    </Compile>
+    <Compile Include="PinkTechIncSiteMaster1.Master.designer.cs">
+      <DependentUpon>PinkTechIncSiteMaster1.Master</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
