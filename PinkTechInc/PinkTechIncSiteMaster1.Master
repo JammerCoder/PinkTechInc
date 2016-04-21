@@ -7,14 +7,55 @@
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/Site.css" rel="stylesheet" />
+    <script src="Scripts/jquery-2.2.3.js"></script>
 </head>
+
 <body>
     <form id="form1" runat="server">
-    <div>
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        
-        </asp:ContentPlaceHolder>
-    </div>
+        <div>
+            <div>
+                <table class="table" border="1" align="center" border="1" width="1200px" height="600px">
+                    <th width="1200px" height="80px" colspan="4">
+                        <img src="images/PinkTechIncHeaderImage.png" />
+                    </th>
+                    <tr>
+                        <td width="120px" height="520px" rowspan="2">
+                            <div>
+                                <ul>
+                                    <li><a href="Home.aspx"><i class="glyphicon glyphicon-home"></i> Home</a></li>
+                                    <li><a href="#About"><i class="glyphicon glyphicon-blackboard"></i> About</a></li>
+                                    <li><a href="#Contact"><i class="glyphicon glyphicon-phone-alt"></i> Contact</a></li>
+                                    <li><a href="#Features"><i class="glyphicon glyphicon-link"></i> Features</a></li>
+                                    <li><a href="Login.aspx"><i class="glyphicon glyphicon-cog"></i> Login</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                        <th width="1080px" height="100px" colspan="3">
+                            <img src="images/pageunderconstruction.png" title="UnderConstruction" />
+                        </th>
+                    </tr>
+                    <tr>
+                        <td width="640px">
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </td>
+                        <td>
+                            <asp:Image ID="Image1" runat="server" ToolTip="An image can placed here!" />
+                        </td>
+                        <td>
+                            <asp:Image ID="Image2" runat="server" ToolTip="An image can placed here!" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <asp:HyperLink class="hyp" ID="hypLogin" runat="server" NavigateUrl="~/Login.aspx">Login</asp:HyperLink>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </form>
 </body>
 </html>

@@ -1,0 +1,48 @@
+﻿body{
+    background-color:#352EF4;
+    align-content:center;
+    color:yellow;
+}
+.table{
+        
+}
+
+.error {
+    color: red;
+}
+
+.textBox,
+.button,
+.control{
+    color:black;
+}
+
+.hyp{
+    color:lightgreen;
+}
+
+.hyp:hover{
+    background-color: #FF49E6 ;
+    color: white;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;    
+    background-color: #352EF4;
+}
+
+li a {
+    display: block;
+    color: yellow;
+    padding: 8px 0 8px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color on hover */
+li a:hover {
+    background-color: #FF49E6 ;
+    color: white;
+}
