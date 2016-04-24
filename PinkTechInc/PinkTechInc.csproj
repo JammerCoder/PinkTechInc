@@ -67,9 +67,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Home.aspx" />
-    <Content Include="images\pageunderconstruction.png" />
+    <Content Include="images\background_lb.jpg" />
+    <Content Include="images\background_prpl.jpg" />
     <Content Include="images\PinkTechIncHeaderImage.png" />
-    <Content Include="images\under-construction-page.png" />
     <Content Include="Login.aspx" />
     <Content Include="PinkTechIncSiteMaster1.Master" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
