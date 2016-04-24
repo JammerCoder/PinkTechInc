@@ -1,48 +1,14 @@
-﻿body{
-    background-color:#352EF4;
-    align-content:center;
-    color:yellow;
-}
-.table{
-        
-}
-
-.error {
-    color: red;
-}
-
-.textBox,
-.button,
-.control{
-    color:black;
-}
-
-.hyp{
-    color:lightgreen;
-}
-
-.hyp:hover{
-    background-color: #FF49E6 ;
-    color: white;
-}
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    width: 200px;    
-    background-color: #352EF4;
-}
-
-li a {
-    display: block;
-    color: yellow;
-    padding: 8px 0 8px 16px;
-    text-decoration: none;
-}
-
-/* Change the link color on hover */
-li a:hover {
-    background-color: #FF49E6 ;
-    color: white;
+﻿#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;    
+    height: 100%;
+    background-image: url('../images/background_lb.jpg');
+    background-repeat: repeat;
+    background-attachment: fixed;
+    background-size: 100%;    
+    opacity: 0.6;
+    filter: alpha(opacity=80);
+    z-index: -10;
 }
