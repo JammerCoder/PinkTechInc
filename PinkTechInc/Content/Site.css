@@ -22,7 +22,7 @@ body table {
     background-image: url('../images/background_prpl.jpg');
     background-repeat: repeat;
     background-attachment: fixed;
-    background-size: 100%;    
+    background-size: 100%;
     opacity: 0.6;
     filter: alpha(opacity=80);
     z-index: -10;
@@ -66,7 +66,7 @@ input[type="text"] {
 }
 
 input[type="password"] {
-    margin-bottom: 20px;
+    margin-bottom: 0;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
@@ -78,11 +78,11 @@ input[type="password"] {
     border-color: #7270b2;
 }
 
- .panel-login > .panel-heading {
-     color: #f4982d;
-     background-color: #2d8af4;
-     border-color: #2d8af4;
- }
+    .panel-login > .panel-heading {
+        color: #f4982d;
+        background-color: #2d8af4;
+        border-color: #2d8af4;
+    }
 
     .panel-login > .panel-title {
         margin-top: 0;
@@ -119,6 +119,24 @@ input[type="password"] {
     }
 
 /*NavBar*/
+table td{
+    vertical-align: top;    
+}
+
+.nav-container{    
+    background: #352EF4;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #f8f809 ;
+    background-color: transparent;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #352EF4 ;
+    background-color: #FF49E6 ;
+    font-weight: 500;
+}
 
 /* Toggle Styles */
 
