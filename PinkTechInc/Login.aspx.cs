@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PinkTechCompanion;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,23 @@ namespace PinkTechInc
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        protected void btnLogin_Click(object sender, EventArgs e)
+        {
+            this.litLoginMessage.Text = "";
+
+            string sCnxn = "ConnectionString";
+            string sLogPath = "LogPath";
+
+            UserPermissions oUsers = new UserPermissions(sCnxn,sLogPath,this.txtUserName.Text,this.txtPassword.Text);
+
+            this.litLoginMessage.Text = oUsers.UserPermissionsReturnMessage + " Redirecting... " ;
+
+            /*if (oUsers.UserPermissionsReturnMessage == "SUCCESS!")
+            {
+                Response.Redirect("Home.aspx" + "?" + Guid.NewGuid().ToString());
+            }*/
         }
     }
 }

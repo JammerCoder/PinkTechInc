@@ -13,7 +13,7 @@
                                 <h2 class="text-center">Welcome</h2>
                                 <h6 class="small text-center">Please provide your Login Name and Password...</h6>
                             </div>
-                            <div class="panel panel-body">
+                            <div class="panel-body">
                                 <form class="form-signin">
                                     <div>
                                         <asp:TextBox class="form-control" ID="txtUserName" runat="server" placeholder="Login Name" />
@@ -27,7 +27,10 @@
                                             ErrorMessage="Password is required!"
                                             ControlToValidate="txtPassword"></asp:RequiredFieldValidator>
                                     </div>
-                                    <asp:Button class="btn btn-lg btn-primary btn-block" ID="btnLogin" runat="server" Text="Login" />
+                                    <div>
+                                        <asp:Button class="btn btn-lg btn-primary btn-block" ID="btnLogin" runat="server" Text="Login" OnClick="btnLogin_Click" /> <br />
+                                        <asp:Literal ID="litLoginMessage" runat="server" />
+                                    </div>
                                 </form>
                             </div>
                         </div>

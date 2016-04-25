@@ -39,8 +39,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="PinkTechCompanion">
-      <HintPath>..\..\PinkTechCompanion\PinkTechCompanion\bin\Debug\PinkTechCompanion.dll</HintPath>
+    <Reference Include="PinkTechCompanion, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PinkTechCompanion\PinkTechCompanion\bin\Debug\PinkTechCompanion.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
