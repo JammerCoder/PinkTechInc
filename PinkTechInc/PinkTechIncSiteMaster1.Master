@@ -15,17 +15,17 @@
 <body>
     <div id="background"></div>
     <header class="container">
-        <img src="images/PinkTechIncHeaderImage.png" />
+        <asp:Image ID="imgLogo" ImageUrl="~/images/PinkTechIncHeaderImage.png" runat="server" width="1200px" Height="80"/>
     </header>
     <div class="container">
         <table border="1" width="1200px" height="600px">
-            <tr width="1200px" height="80px">
-                <th colspan="2">PinkTech</th>
-            </tr>
+            <th width="1200px" height="80px" colspan="4">
+                <h6>Header Cell 1200x80</h6>
+            </th>
             <tr>
                 <td width="120px" height="520px" rowspan="2">
-                    <div id="sidebar-wrapper">
-                        <ul class="sidebar-nav">
+                    <div class="nav navbar">
+                        <ul class="">
                             <li class="active"><a href="Home.aspx"><i class="glyphicon glyphicon-home"></i>  Home</a></li>
                             <li><a href="#"><i class="glyphicon glyphicon-blackboard"></i> About</a></li>
                             <li><a href="#"><i class="glyphicon glyphicon-phone-alt"></i> Contact</a></li>
