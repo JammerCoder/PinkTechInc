@@ -1,6 +1,7 @@
 ﻿using PinkTechCompanion;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -17,10 +18,14 @@ namespace PinkTechInc
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
+            
             this.litLoginMessage.Text = "";
 
-            string sCnxn = "ConnectionString";
-            string sLogPath = "LogPath";
+            //string sCnxn = "ConnectionString";
+            //string sLogPath = "LogPath";
+
+            string sCnxn = ConfigurationManager.AppSettings["Cnxn"];
+            string sLogPath = ConfigurationManager.AppSettings["LogPath"];
 
             UserPermissions oUsers = new UserPermissions(sCnxn,sLogPath,this.txtUserName.Text,this.txtPassword.Text);
 
