@@ -22,7 +22,7 @@
                                             ControlToValidate="txtUserName"></asp:RequiredFieldValidator>
                                     </div>
                                     <div>
-                                        <asp:TextBox class="form-control" ID="txtPassword" runat="server" TextMode="Password" placeholder="Password" />
+                                        <asp:TextBox class="form-control" ID="txtPassword" runat="server" TextMode="Password" placeholder="Password" OnTextChanged="txtPassword_TextChanged" />
                                         <asp:RequiredFieldValidator class="text-danger" ID="rfvPassword" runat="server"
                                             ErrorMessage="Password is required!"
                                             ControlToValidate="txtPassword"></asp:RequiredFieldValidator>

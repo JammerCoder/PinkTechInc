@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace PinkTechInc
 {
-    public partial class Login : System.Web.UI.Page
+    public partial class Login : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -18,23 +18,53 @@ namespace PinkTechInc
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            
-            this.litLoginMessage.Text = "";
-
-            //string sCnxn = "ConnectionString";
-            //string sLogPath = "LogPath";
-
-            string sCnxn = ConfigurationManager.AppSettings["Cnxn"];
-            string sLogPath = ConfigurationManager.AppSettings["LogPath"];
-
-            UserPermissions oUsers = new UserPermissions(sCnxn,sLogPath,this.txtUserName.Text,this.txtPassword.Text);
-
-            this.litLoginMessage.Text = oUsers.UserPermissionsReturnMessage + " Redirecting... " ;
-
-            /*if (oUsers.UserPermissionsReturnMessage == "SUCCESS!")
+            try
             {
-                Response.Redirect("Home.aspx" + "?" + Guid.NewGuid().ToString());
-            }*/
+                litLoginMessage.Text = "";
+
+                string sCnxn = ConfigurationManager.AppSettings["Cnxn"];
+                string sLogPath = ConfigurationManager.AppSettings["LogPath"];
+
+                var oUser = new UserPermissions();
+                
+                var userPermission = oUser.Login(sCnxn, sLogPath, txtUserName.Text, txtPassword.Text);
+                string sGuid = Guid.NewGuid().ToString();
+
+                Cache[sGuid] = userPermission;
+                
+                if (oUser.UserPermissionsReturnMessage == "SUCCESS!")
+                {
+                    litLoginMessage.Text = "Good day, " + userPermission.UserName + " Redirecting... "; //Just for checking... You can remove me....
+
+                    switch (userPermission.SecurityLevelName.ToUpper())
+                    {
+                        case "SUPERADMIN":
+                            Response.Redirect("AdminMenu.aspx?ID="+sGuid);
+                            break;
+                        case "ADMIN":
+                            Response.Redirect("AdminMenu.aspx?ID=" + sGuid);
+                            break;
+                        default:
+                            Response.Redirect("UserHome.aspx?ID="+sGuid);
+                            break;
+                    }
+                    
+                }
+                else
+                    litLoginMessage.Text = " <font color='Red'> UserName or Password Failed! </font>";
+
+                
+            }
+            catch (Exception ex)
+            {
+                litLoginMessage.Text = ex.Message;
+            }
+
+        }
+
+        protected void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+            litLoginMessage.Text = "";
         }
     }
 }
