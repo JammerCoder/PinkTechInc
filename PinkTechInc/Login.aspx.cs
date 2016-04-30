@@ -25,18 +25,18 @@ namespace PinkTechInc
                 string sCnxn = ConfigurationManager.AppSettings["Cnxn"];
                 string sLogPath = ConfigurationManager.AppSettings["LogPath"];
 
-                var oUser = new UserPermissions();
+                UserPermissions oUserPermissions = new UserPermissions();
                 
-                var userPermission = oUser.Login(sCnxn, sLogPath, txtUserName.Text, txtPassword.Text);
+                User oUser = oUserPermissions.Login(sCnxn, sLogPath, txtUserName.Text, txtPassword.Text);
+                
                 string sGuid = Guid.NewGuid().ToString();
-
-                Cache[sGuid] = userPermission;
+                Cache[sGuid] = oUser;
                 
-                if (oUser.UserPermissionsReturnMessage == "SUCCESS!")
+                if (oUserPermissions.UserPermissionsReturnMessage == "SUCCESS!")
                 {
-                    litLoginMessage.Text = "Good day, " + userPermission.UserName + " Redirecting... "; //Just for checking... You can remove me....
+                    litLoginMessage.Text = "Good day, " + oUser.UserName + " Redirecting... "; //Just for checking... You can remove me....
 
-                    switch (userPermission.SecurityLevelName.ToUpper())
+                    switch (oUser.SecurityLevelName.ToUpper())
                     {
                         case "SUPERADMIN":
                             Response.Redirect("AdminMenu.aspx?ID="+sGuid);
@@ -48,12 +48,9 @@ namespace PinkTechInc
                             Response.Redirect("UserHome.aspx?ID="+sGuid);
                             break;
                     }
-                    
                 }
                 else
-                    litLoginMessage.Text = " <font color='Red'> UserName or Password Failed! </font>";
-
-                
+                    litLoginMessage.Text = " <font color='Red'>" + oUserPermissions.UserPermissionsReturnMessage + "</font>";
             }
             catch (Exception ex)
             {

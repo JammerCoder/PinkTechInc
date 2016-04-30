@@ -6,21 +6,20 @@ using System.Diagnostics.Eventing.Reader;
 
 namespace PinkTechCompanion
 {
-    public class UserPermissions : Dictionary<int, UserPermission>
+    public class UserPermissions : Dictionary<int, User>
     {
         public string UserPermissionsReturnMessage { get; set; }
 
-        static UserPermissions()
+        public UserPermissions()
         {
         }
-        
-        public UserPermission Login(string sCnxn, string sLogPath, string sUserName, string sPassword)
+
+        public User Login(string sCnxn, string sLogPath, string sUserName, string sPassword)
         {
             UserPermissionsReturnMessage = "";
-
             try
             {
-                
+
                 #region History
                 /*if (sUserName.ToUpper() == "SUCCESS")
                 {
@@ -34,56 +33,63 @@ namespace PinkTechCompanion
                  * */
                 #endregion History
 
-                var oCnxn = new SqlConnection(sCnxn);
-                var oCmd = new SqlCommand("spUserInfoFetchCredentials", oCnxn)
+                SqlConnection oCnxn = new SqlConnection(sCnxn);
+                SqlCommand oCmd = new SqlCommand("spUserInfoFetchCredentials", oCnxn)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
                 oCmd.Parameters.AddWithValue("@UserName", sUserName);
                 oCmd.Parameters.AddWithValue("@Passwrd", sPassword);
 
-                oCnxn.Open();                
-                var oReader = oCmd.ExecuteReader();
+                oCnxn.Open();
+                SqlDataReader oReader = oCmd.ExecuteReader();
 
-                int count = 0;
-                
-                UserPermission oNewUserPermission = new UserPermission();
+                User oUser = new User();
 
                 while (oReader.Read())
                 {
-                    oNewUserPermission.FirstName = oReader["FirstName"].ToString();
-                    oNewUserPermission.MiddleName = oReader["MiddleName"].ToString();
-                    oNewUserPermission.LastName = oReader["LastName"].ToString();
-                    oNewUserPermission.UserName = oReader["UserName"].ToString();
-                    oNewUserPermission.Email = oReader["Email"].ToString();
-                    oNewUserPermission.Passwrd = oReader["Passwrd"].ToString();
-                    oNewUserPermission.SecurityLevelName = oReader["SecurityLevelName"].ToString();
-                    oNewUserPermission.IsActive = Convert.ToBoolean(oReader["IsActive"]);
+                    oUser.FirstName = oReader["FirstName"].ToString();
+                    oUser.MiddleName = oReader["MiddleName"].ToString();
+                    oUser.LastName = oReader["LastName"].ToString();
+                    oUser.UserName = oReader["UserName"].ToString();
+                    oUser.Email = oReader["Email"].ToString();
+                    oUser.Passwrd = oReader["Passwrd"].ToString();
+                    oUser.SecurityLevelName = oReader["SecurityLevelName"].ToString();
+                    oUser.IsActive = Convert.ToBoolean(oReader["IsActive"]);
 
-                    if (!ContainsKey(oNewUserPermission.UserID))
-                    {
-                        Add(oNewUserPermission.UserID, oNewUserPermission);
-                    }
+                    if (!ContainsKey(oUser.UserID))
+                        this.Add(oUser.UserID, oUser);
+                }
+                
+                if(oUser.UserName == sUserName && oUser.Passwrd == sPassword)
+                    UserPermissionsReturnMessage = "SUCCESS!";
+                else
+                {
+                    UserPermissionsReturnMessage = "Login ";
+                    if (oUser.UserName != sUserName && oUser.Passwrd == sPassword)
+                        UserPermissionsReturnMessage += "NAME Failed!";
 
-                    count += 1;
+                    if (oUser.UserName == sUserName && oUser.Passwrd != sPassword)
+                        UserPermissionsReturnMessage += "PASSWORD Failed!";
+
+                    if (oUser.UserName != sUserName && oUser.Passwrd != sPassword)
+                        UserPermissionsReturnMessage += "NAME and PASSWORD Failed!";
                 }
                 oCnxn.Close();
-                UserPermissionsReturnMessage = count == 0 ? "FAILED!" : "SUCCESS!";
-                return oNewUserPermission;
+                return oUser;
             }
             catch (Exception ex)
             {
                 Log oLog = new Log();
                 oLog.LogError("UserPermissions: " + sUserName + ", " + sPassword + "-> ",
                     ex.Message, sLogPath);
-                UserPermissionsReturnMessage = "FAILED!";
+                UserPermissionsReturnMessage = "Login FAILED!";
                 return null;
             }
         }
-        
     }
 
-    public class UserPermission
+    public class User
     {
         #region Properties
 
