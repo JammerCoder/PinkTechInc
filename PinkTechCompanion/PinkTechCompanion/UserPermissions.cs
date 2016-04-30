@@ -3,36 +3,73 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics.Eventing.Reader;
-using System.Threading;
 
 namespace PinkTechCompanion
 {
-    public class UserPermissions : Dictionary<int, User>
+    public class UserPermissions : Dictionary<int, UserPermission>
     {
         public string UserPermissionsReturnMessage { get; set; }
-        private static string sUserNameStatic;
-        private static string sPasswordStatic;
-        private static string sCnxnStatic;
-        private static string sLogPathStatic;
-        private static string sLoginMessage;
 
-        public UserPermissions()
+        static UserPermissions()
         {
         }
-
-        public UserPermissions(string sCnxn, string sLogPath, string sUserName, string sPassword)
+        
+        public UserPermission Login(string sCnxn, string sLogPath, string sUserName, string sPassword)
         {
+            UserPermissionsReturnMessage = "";
+
             try
             {
+                
                 #region History
-
+                /*if (sUserName.ToUpper() == "SUCCESS")
+                {
+                    if (sGUID.ToUpper() == "SUCCESS")
+                        UserPermissionsReturnMessage = "SUCCESS!";
+                    else
+                        UserPermissionsReturnMessage = "PASSWORD failed!";
+                }
+                else
+                    UserPermissionsReturnMessage = "LOGIN Name not found!";
+                 * */
                 #endregion History
 
-                sUserNameStatic = sUserName;
-                sPasswordStatic = sPassword;
+                var oCnxn = new SqlConnection(sCnxn);
+                var oCmd = new SqlCommand("spUserInfoFetchCredentials", oCnxn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                oCmd.Parameters.AddWithValue("@UserName", sUserName);
+                oCmd.Parameters.AddWithValue("@Passwrd", sPassword);
 
-                UserPermissionsReturnMessage = Login();
+                oCnxn.Open();                
+                var oReader = oCmd.ExecuteReader();
 
+                int count = 0;
+                
+                UserPermission oNewUserPermission = new UserPermission();
+
+                while (oReader.Read())
+                {
+                    oNewUserPermission.FirstName = oReader["FirstName"].ToString();
+                    oNewUserPermission.MiddleName = oReader["MiddleName"].ToString();
+                    oNewUserPermission.LastName = oReader["LastName"].ToString();
+                    oNewUserPermission.UserName = oReader["UserName"].ToString();
+                    oNewUserPermission.Email = oReader["Email"].ToString();
+                    oNewUserPermission.Passwrd = oReader["Passwrd"].ToString();
+                    oNewUserPermission.SecurityLevelName = oReader["SecurityLevelName"].ToString();
+                    oNewUserPermission.IsActive = Convert.ToBoolean(oReader["IsActive"]);
+
+                    if (!ContainsKey(oNewUserPermission.UserID))
+                    {
+                        Add(oNewUserPermission.UserID, oNewUserPermission);
+                    }
+
+                    count += 1;
+                }
+                oCnxn.Close();
+                UserPermissionsReturnMessage = count == 0 ? "FAILED!" : "SUCCESS!";
+                return oNewUserPermission;
             }
             catch (Exception ex)
             {
@@ -40,60 +77,13 @@ namespace PinkTechCompanion
                 oLog.LogError("UserPermissions: " + sUserName + ", " + sPassword + "-> ",
                     ex.Message, sLogPath);
                 UserPermissionsReturnMessage = "FAILED!";
-                //return null;
+                return null;
             }
         }
-
-        static string Login()
-        {
-            try
-            {
-                #region History
-
-                #endregion History
-                
-                SqlConnection oCnxn = new SqlConnection(sCnxnStatic);
-                SqlCommand oCmd = new SqlCommand("spUserInfoFetchCredentials", oCnxn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                oCmd.Parameters.AddWithValue("@UserName", sUserNameStatic);
-                oCmd.Parameters.AddWithValue("@Passwrd", sPasswordStatic);
-
-                oCnxn.Open();
-                SqlDataReader oReader = oCmd.ExecuteReader();
-
-                while (oReader.Read())
-                {
-                    User oUser = new User();
-                    oUser.FirstName = oReader["FirstName"].ToString();
-                    oUser.MiddleName = oReader["MiddleName"].ToString();
-                    oUser.LastName = oReader["LastName"].ToString();
-                    oUser.UserName = oReader["UserName"].ToString();
-                    oUser.Email = oReader["Email"].ToString();
-                    oUser.Passwrd = oReader["Passwrd"].ToString();
-                    oUser.SecurityLevelName = oReader["SecurityLevelName"].ToString();
-                    oUser.IsActive = Convert.ToBoolean(oReader["IsActive"]);
-                    oUser.UserID = Convert.ToInt32(oReader["UserID"]);
-
-                    if(oUser.UserName == sUserNameStatic)
-                        sLoginMessage = oUser.Passwrd == sPasswordStatic ? "SUCCESS!" : "PASSWORD Failed!";
-                    else
-                        sLoginMessage = "USERNAME Failed!";
-                }
-                oCnxn.Close();
-                return sLoginMessage;
-            }
-            catch (Exception ex)
-            {
-                Log oLog = new Log();
-                oLog.LogError("Login",ex.Message, sLogPathStatic);
-                return "Login FAILED!";
-            }
-        }
+        
     }
 
-    public class User
+    public class UserPermission
     {
         #region Properties
 

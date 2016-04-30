@@ -1,7 +1,11 @@
 ﻿using PinkTechCompanion;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
+using System.Web;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace PinkTechInc
 {
@@ -21,14 +25,14 @@ namespace PinkTechInc
                 string sCnxn = ConfigurationManager.AppSettings["Cnxn"];
                 string sLogPath = ConfigurationManager.AppSettings["LogPath"];
 
-                //User oUser = new User();
-                UserPermissions oUserPermissions = new UserPermissions(sCnxn, sLogPath, txtUserName.Text, txtPassword.Text);
-                litLoginMessage.Text = oUserPermissions.UserPermissionsReturnMessage;
+                var oUser = new UserPermissions();
                 
+                var userPermission = oUser.Login(sCnxn, sLogPath, txtUserName.Text, txtPassword.Text);
                 string sGuid = Guid.NewGuid().ToString();
-                //Cache[sGuid] = userPermission;
+
+                Cache[sGuid] = userPermission;
                 
-                /*if (oUser.UserPermissionsReturnMessage == "SUCCESS!")
+                if (oUser.UserPermissionsReturnMessage == "SUCCESS!")
                 {
                     litLoginMessage.Text = "Good day, " + userPermission.UserName + " Redirecting... "; //Just for checking... You can remove me....
 
@@ -47,12 +51,15 @@ namespace PinkTechInc
                     
                 }
                 else
-                    litLoginMessage.Text = " <font color='Red'> UserName or Password Failed! </font>";*/
+                    litLoginMessage.Text = " <font color='Red'> UserName or Password Failed! </font>";
+
+                
             }
             catch (Exception ex)
             {
                 litLoginMessage.Text = ex.Message;
             }
+
         }
 
         protected void txtPassword_TextChanged(object sender, EventArgs e)
