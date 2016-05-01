@@ -24,17 +24,15 @@ namespace PinkTechInc
 
                 string sCnxn = ConfigurationManager.AppSettings["Cnxn"];
                 string sLogPath = ConfigurationManager.AppSettings["LogPath"];
-
-                UserPermissions oUserPermissions = new UserPermissions();
                 
-                User oUser = oUserPermissions.Login(sCnxn, sLogPath, txtUserName.Text, txtPassword.Text);
+                User oUser = UserPermissions.Login(sCnxn, sLogPath, txtUserName.Text, txtPassword.Text);
                 
                 string sGuid = Guid.NewGuid().ToString();
                 Cache[sGuid] = oUser;
                 
-                if (oUserPermissions.UserPermissionsReturnMessage == "SUCCESS!")
+                if (UserPermissions.UserPermissionsReturnMessage == "SUCCESS!")
                 {
-                    litLoginMessage.Text = "Good day, " + oUser.UserName + " Redirecting... "; //Just for checking... You can remove me....
+                    //litLoginMessage.Text = "Good day, " + oUser.UserName + " Redirecting... "; //Just for checking... You can remove me....
 
                     switch (oUser.SecurityLevelName.ToUpper())
                     {
@@ -50,7 +48,7 @@ namespace PinkTechInc
                     }
                 }
                 else
-                    litLoginMessage.Text = " <font color='Red'>" + oUserPermissions.UserPermissionsReturnMessage + "</font>";
+                    litLoginMessage.Text = " <font color='Red'>" + UserPermissions.UserPermissionsReturnMessage + "</font>";
             }
             catch (Exception ex)
             {

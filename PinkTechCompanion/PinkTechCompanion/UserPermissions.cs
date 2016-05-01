@@ -1,22 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics.Eventing.Reader;
+
 
 namespace PinkTechCompanion
 {
-    public class UserPermissions : Dictionary<int, User>
+    public class UserPermissions
     {
-        public string UserPermissionsReturnMessage { get; set; }
+        public static string UserPermissionsReturnMessage { get; set; }
 
-        public UserPermissions()
-        {
-        }
-
-        public User Login(string sCnxn, string sLogPath, string sUserName, string sPassword)
+        public static User Login(string sCnxn, string sLogPath, string sUserName, string sPassword)
         {
             UserPermissionsReturnMessage = "";
+            SqlConnection oCnxn = new SqlConnection(sCnxn);
             try
             {
 
@@ -33,7 +29,6 @@ namespace PinkTechCompanion
                  * */
                 #endregion History
 
-                SqlConnection oCnxn = new SqlConnection(sCnxn);
                 SqlCommand oCmd = new SqlCommand("spUserInfoFetchCredentials", oCnxn)
                 {
                     CommandType = CommandType.StoredProcedure
@@ -44,8 +39,9 @@ namespace PinkTechCompanion
                 oCnxn.Open();
                 SqlDataReader oReader = oCmd.ExecuteReader();
 
-                User oUser = new User();
+                int iRecCounter = 0;
 
+                User oUser = new User();
                 while (oReader.Read())
                 {
                     oUser.FirstName = oReader["FirstName"].ToString();
@@ -56,35 +52,65 @@ namespace PinkTechCompanion
                     oUser.Passwrd = oReader["Passwrd"].ToString();
                     oUser.SecurityLevelName = oReader["SecurityLevelName"].ToString();
                     oUser.IsActive = Convert.ToBoolean(oReader["IsActive"]);
+                    oUser.UserID = Convert.ToInt32(oReader["UserID"]);
 
-                    if (!ContainsKey(oUser.UserID))
-                        this.Add(oUser.UserID, oUser);
-                }
-                
-                if(oUser.UserName == sUserName && oUser.Passwrd == sPassword)
-                    UserPermissionsReturnMessage = "SUCCESS!";
-                else
-                {
-                    UserPermissionsReturnMessage = "Login ";
-                    if (oUser.UserName != sUserName && oUser.Passwrd == sPassword)
-                        UserPermissionsReturnMessage += "NAME Failed!";
-
-                    if (oUser.UserName == sUserName && oUser.Passwrd != sPassword)
-                        UserPermissionsReturnMessage += "PASSWORD Failed!";
-
-                    if (oUser.UserName != sUserName && oUser.Passwrd != sPassword)
-                        UserPermissionsReturnMessage += "NAME and PASSWORD Failed!";
+                    iRecCounter++;
                 }
                 oCnxn.Close();
+
+                if (iRecCounter > 0)
+                {
+                    if (oUser.UserName == sUserName && oUser.Passwrd == sPassword)
+                        UserPermissionsReturnMessage = "SUCCESS!";
+                    else if (oUser.UserName != sUserName)
+                        UserPermissionsReturnMessage = "USERNAME Failed!"; //There is typographical error in UserName.
+                    else
+                        UserPermissionsReturnMessage = "PASSWORD Failed!"; //There is typographical error in Password.
+
+                }
+                else
+                {
+                    oCmd.CommandText = "spUserFetchByName";
+                    oCmd.Parameters.Clear();
+                    oCmd.Parameters.AddWithValue("@UserName", sUserName);
+
+                    oCnxn.Open();
+                    SqlDataReader oNameDataReaderReader = oCmd.ExecuteReader();
+
+                    while (oNameDataReaderReader.Read())
+                    {
+                        oUser.FirstName = oNameDataReaderReader["FirstName"].ToString();
+                        oUser.MiddleName = oNameDataReaderReader["MiddleName"].ToString();
+                        oUser.LastName = oNameDataReaderReader["LastName"].ToString();
+                        oUser.UserName = oNameDataReaderReader["UserName"].ToString();
+                        oUser.Email = oNameDataReaderReader["Email"].ToString();
+                        oUser.Passwrd = oNameDataReaderReader["Passwrd"].ToString();
+                        oUser.SecurityLevelName = oNameDataReaderReader["SecurityLevelName"].ToString();
+                        oUser.IsActive = Convert.ToBoolean(oNameDataReaderReader["IsActive"]);
+                        oUser.UserID = Convert.ToInt32(oNameDataReaderReader["UserID"]);
+
+                        iRecCounter++;
+                    }
+                    if (iRecCounter > 0)
+                        UserPermissionsReturnMessage = oUser.Passwrd != sPassword ? "PASSWORD Failed!" : "SUCCESS!";
+                    else
+                        UserPermissionsReturnMessage = "LOGIN Failed"; //Both UserName and Password Fails.
+                }
+                //Reminder: Recreate this function for better performance, after it functions properly....
+                //Recreate: DataReader can be to the least instance.
                 return oUser;
             }
             catch (Exception ex)
             {
                 Log oLog = new Log();
-                oLog.LogError("UserPermissions: " + sUserName + ", " + sPassword + "-> ",
+                oLog.LogError("Login: " + sUserName + ", " + sPassword + "-> ",
                     ex.Message, sLogPath);
-                UserPermissionsReturnMessage = "Login FAILED!";
+                UserPermissionsReturnMessage = "Error Exeption found, Login FAILED!";
                 return null;
+            }
+            finally
+            {
+                oCnxn.Close();
             }
         }
     }
