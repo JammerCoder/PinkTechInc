@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace PinkTechInc
 {
-    public partial class PinkTechIncSiteMaster1 : System.Web.UI.MasterPage
+    public partial class PinkTechIncSiteMaster1 : MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

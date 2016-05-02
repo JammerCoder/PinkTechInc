@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace PinkTechInc
 {
-    public partial class Home : System.Web.UI.Page
+    public partial class Home : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

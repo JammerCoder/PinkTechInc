@@ -1,48 +1,146 @@
-﻿body{
-    background-color:#352EF4;
-    align-content:center;
-    color:yellow;
-}
-.table{
-        
-}
-
-.error {
-    color: red;
-}
-
-.textBox,
-.button,
-.control{
-    color:black;
-}
-
-.hyp{
-    color:lightgreen;
-}
-
-.hyp:hover{
-    background-color: #FF49E6 ;
-    color: white;
-}
-
-ul {
-    list-style-type: none;
+﻿.page-header {
     margin: 0;
-    padding: 0;
-    width: 200px;    
-    background-color: #352EF4;
 }
 
-li a {
-    display: block;
-    color: yellow;
-    padding: 8px 0 8px 16px;
-    text-decoration: none;
+body table {
+    background: #fff !important;
 }
 
-/* Change the link color on hover */
-li a:hover {
+/*header*/
+
+/*footer*/
+
+@import "bourbon";
+/*Login Form*/
+
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/background_prpl.jpg');
+    background-repeat: repeat;
+    background-attachment: fixed;
+    background-size: 100%;
+    opacity: 0.6;
+    filter: alpha(opacity=80);
+    z-index: -10;
+}
+
+.wrapper {
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.form-signin {
+    max-width: 380px;
+    padding: 15px 35px 45px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.form-signin-heading,
+.checkbox {
+    margin-bottom: 30px;
+}
+
+.checkbox {
+    font-weight: normal;
+}
+
+.form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    @include box-sizing(border-box);
+    &:focus;
+}
+
+input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+input[type="password"] {
+    margin-bottom: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.panel-login {
+    text-align: center;
+    color: #f4982d;
+    background-color: #928eF9;
+    border-color: #7270b2;
+}
+
+    .panel-login > .panel-heading {
+        color: #f4982d;
+        background-color: #2d8af4;
+        border-color: #2d8af4;
+    }
+
+    .panel-login > .panel-title {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 24px;
+        text-align: center;
+        color: #f4982d;
+        background: inherit;
+    }
+
+    .panel-login > .panel-sub {
+        text-align: inherit;
+        color: #f8f809;
+        background: inherit;
+    }
+
+.btn-login {
+    color: #fff;
+    background-color: #2d8af4;
+    border-color: #c1bffb;
+}
+
+    .btn-login:focus,
+    .btn-login.focus {
+        color: #fff;
+        background-color: #449d44;
+        border-color: #255625;
+    }
+
+    .btn-login:hover {
+        color: #fff;
+        background-color: #352ef4;
+        border-color: #2d8ef4;
+    }
+
+/*NavBar*/
+table td{
+    vertical-align: top;    
+}
+
+.nav-container{    
+    background: #352EF4;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #f8f809 ;
+    background-color: transparent;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #352EF4 ;
     background-color: #FF49E6 ;
-    color: white;
+    font-weight: 500;
 }
+
+/* Toggle Styles */
+
+
+/* Sidebar Styles */
+
+
