@@ -27,12 +27,11 @@ namespace PinkTechInc
                 
                 User oUser = UserPermissions.Login(sCnxn, sLogPath, txtUserName.Text, txtPassword.Text);
                 
-                string sGuid = Guid.NewGuid().ToString();
-                Cache[sGuid] = oUser;
-                
                 if (UserPermissions.UserPermissionsReturnMessage == "SUCCESS!")
                 {
                     //litLoginMessage.Text = "Good day, " + oUser.UserName + " Redirecting... "; //Just for checking... You can remove me....
+                    string sGuid = Guid.NewGuid().ToString();
+                    Cache[sGuid] = oUser;
 
                     switch (oUser.SecurityLevelName.ToUpper())
                     {
@@ -54,7 +53,6 @@ namespace PinkTechInc
             {
                 litLoginMessage.Text = ex.Message;
             }
-
         }
 
         protected void txtPassword_TextChanged(object sender, EventArgs e)

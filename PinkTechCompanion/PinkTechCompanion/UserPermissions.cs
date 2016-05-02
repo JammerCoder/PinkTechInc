@@ -36,75 +36,68 @@ namespace PinkTechCompanion
                 oCmd.Parameters.AddWithValue("@UserName", sUserName);
                 oCmd.Parameters.AddWithValue("@Passwrd", sPassword);
 
+                User oUser = new User();
+
                 oCnxn.Open();
                 SqlDataReader oReader = oCmd.ExecuteReader();
 
-                int iRecCounter = 0;
-
-                User oUser = new User();
-                while (oReader.Read())
+                if (oReader.HasRows)
                 {
-                    oUser.FirstName = oReader["FirstName"].ToString();
-                    oUser.MiddleName = oReader["MiddleName"].ToString();
-                    oUser.LastName = oReader["LastName"].ToString();
-                    oUser.UserName = oReader["UserName"].ToString();
-                    oUser.Email = oReader["Email"].ToString();
-                    oUser.Passwrd = oReader["Passwrd"].ToString();
-                    oUser.SecurityLevelName = oReader["SecurityLevelName"].ToString();
-                    oUser.IsActive = Convert.ToBoolean(oReader["IsActive"]);
-                    oUser.UserID = Convert.ToInt32(oReader["UserID"]);
-
-                    iRecCounter++;
-                }
-                oCnxn.Close();
-
-                if (iRecCounter > 0)
-                {
+                    while (oReader.Read())
+                    {
+                        oUser.FirstName = oReader["FirstName"].ToString();
+                        oUser.MiddleName = oReader["MiddleName"].ToString();
+                        oUser.LastName = oReader["LastName"].ToString();
+                        oUser.UserName = oReader["UserName"].ToString();
+                        oUser.Email = oReader["Email"].ToString();
+                        oUser.Passwrd = oReader["Passwrd"].ToString();
+                        oUser.SecurityLevelName = oReader["SecurityLevelName"].ToString();
+                        oUser.IsActive = Convert.ToBoolean(oReader["IsActive"]);
+                        oUser.UserID = Convert.ToInt32(oReader["UserID"]);
+                    }
                     if (oUser.UserName == sUserName && oUser.Passwrd == sPassword)
                         UserPermissionsReturnMessage = "SUCCESS!";
                     else if (oUser.UserName != sUserName)
-                        UserPermissionsReturnMessage = "USERNAME Failed!"; //There is typographical error in UserName.
+                        UserPermissionsReturnMessage = "USERNAME Failed!"; //There is problem or typographical error in UserName.
                     else
-                        UserPermissionsReturnMessage = "PASSWORD Failed!"; //There is typographical error in Password.
+                        UserPermissionsReturnMessage = "PASSWORD Failed!"; //There is problem or typographical error in Password.
 
+                    oCnxn.Close();
                 }
                 else
                 {
+                    oCnxn.Close();
+
                     oCmd.CommandText = "spUserFetchByName";
                     oCmd.Parameters.Clear();
                     oCmd.Parameters.AddWithValue("@UserName", sUserName);
-
+                    
                     oCnxn.Open();
-                    SqlDataReader oNameDataReaderReader = oCmd.ExecuteReader();
+                    SqlDataReader oNameDataReader = oCmd.ExecuteReader();
 
-                    while (oNameDataReaderReader.Read())
+                    while (oNameDataReader.Read())
                     {
-                        oUser.FirstName = oNameDataReaderReader["FirstName"].ToString();
-                        oUser.MiddleName = oNameDataReaderReader["MiddleName"].ToString();
-                        oUser.LastName = oNameDataReaderReader["LastName"].ToString();
-                        oUser.UserName = oNameDataReaderReader["UserName"].ToString();
-                        oUser.Email = oNameDataReaderReader["Email"].ToString();
-                        oUser.Passwrd = oNameDataReaderReader["Passwrd"].ToString();
-                        oUser.SecurityLevelName = oNameDataReaderReader["SecurityLevelName"].ToString();
-                        oUser.IsActive = Convert.ToBoolean(oNameDataReaderReader["IsActive"]);
-                        oUser.UserID = Convert.ToInt32(oNameDataReaderReader["UserID"]);
-
-                        iRecCounter++;
+                        oUser.FirstName = oNameDataReader["FirstName"].ToString();
+                        oUser.MiddleName = oNameDataReader["MiddleName"].ToString();
+                        oUser.LastName = oNameDataReader["LastName"].ToString();
+                        oUser.UserName = oNameDataReader["UserName"].ToString();
+                        oUser.Email = oNameDataReader["Email"].ToString();
+                        oUser.Passwrd = oNameDataReader["Passwrd"].ToString();
+                        oUser.SecurityLevelName = oNameDataReader["SecurityLevelName"].ToString();
+                        oUser.IsActive = Convert.ToBoolean(oNameDataReader["IsActive"]);
+                        oUser.UserID = Convert.ToInt32(oNameDataReader["UserID"]);
                     }
-                    if (iRecCounter > 0)
+                    if (oNameDataReader.HasRows)
                         UserPermissionsReturnMessage = oUser.Passwrd != sPassword ? "PASSWORD Failed!" : "SUCCESS!";
                     else
                         UserPermissionsReturnMessage = "LOGIN Failed"; //Both UserName and Password Fails.
                 }
-                //Reminder: Recreate this function for better performance, after it functions properly....
-                //Recreate: DataReader can be to the least instance.
                 return oUser;
             }
             catch (Exception ex)
             {
                 Log oLog = new Log();
-                oLog.LogError("Login: " + sUserName + ", " + sPassword + "-> ",
-                    ex.Message, sLogPath);
+                oLog.LogError("Login: ", ex.Message, sLogPath);
                 UserPermissionsReturnMessage = "Error Exeption found, Login FAILED!";
                 return null;
             }
