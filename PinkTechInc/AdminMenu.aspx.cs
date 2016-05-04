@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using PinkTechCompanion;
 
 namespace PinkTechInc
@@ -12,10 +7,16 @@ namespace PinkTechInc
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            var user = (User)Cache[Request.QueryString["ID"]];
-            lblUserName.Text = user.UserName;
-            lblFullName.Text = user.FirstName + " " + user.LastName;
-            lblUserRole.Text = user.SecurityLevelName;
+            User oUser = (User)Cache[Request.QueryString["ID"]];
+            Global oNewGlobal = new Global();
+            Messages oNewMessages = new Messages(oNewGlobal.Cnxn(), oNewGlobal.LogPath(), oUser.UserID);
+
+            lblUserName.Text = oUser.UserName;
+            if (oNewMessages.Count > 1)
+                lblNewMessage.Text = oNewMessages.Count.ToString();
+            
+            grdMessages.DataSource = oNewMessages.Values;
+            grdMessages.DataBind();
         }
     }
 }
