@@ -31,13 +31,13 @@ namespace PinkTechInc {
         protected global::System.Web.UI.WebControls.Label lblUserName;
         
         /// <summary>
-        /// grdMessages control.
+        /// grdInbox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdMessages;
+        protected global::System.Web.UI.WebControls.GridView grdInbox;
         
         /// <summary>
         /// txtRecepient control.
@@ -92,5 +92,14 @@ namespace PinkTechInc {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSend;
+        
+        /// <summary>
+        /// grdSent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdSent;
     }
 }
