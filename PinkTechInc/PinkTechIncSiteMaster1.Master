@@ -32,11 +32,11 @@
                     <nav class="navbar navbar-default">
                         <div class="nav-container">
                             <ul class="nav navbar-nav nav-container">
-                                <li><a href="Home.aspx"><i class="glyphicon glyphicon-home"></i>Home</a></li>
+                                <li><a href="../Home.aspx"><i class="glyphicon glyphicon-home"></i>Home</a></li>
                                 <li><a href="#news"><i class="glyphicon glyphicon-book"></i>About</a></li>
                                 <li><a href="#contact"><i class="glyphicon glyphicon-phone-alt"></i>Contact</a></li>
                                 <li><a href="#about"><i class="glyphicon glyphicon-film"></i>Features</a></li>
-                                <li><a href="Login.aspx"><i class="glyphicon glyphicon-cog"></i>Login</a></li>
+                                <li><a href="../Login.aspx"><i class="glyphicon glyphicon-cog"></i>Login</a></li>
                             </ul>
                         </div>
                     </nav>

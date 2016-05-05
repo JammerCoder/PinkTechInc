@@ -59,7 +59,7 @@ namespace PinkTechCompanion
             }
         }
 
-        public DataTable SentMessages(string sCnxn, string sLogPath, int iUserID)
+        public Dictionary<int, SentMessage> SentMessages(string sCnxn, string sLogPath, int iUserID)
         {
             /*Moved from BookList*/
             //Instantiating new connection object
@@ -67,6 +67,8 @@ namespace PinkTechCompanion
 
             try
             {
+                #region History
+                /*
                 List<SentMessage> oSentMessages = new List<SentMessage>();
                 Dictionary<int, SentMessage> oSentMessagesNew = new Dictionary<int, SentMessage>();
 
@@ -86,16 +88,53 @@ namespace PinkTechCompanion
                 //Instantiating new DataTable
                 DataTable dtSentMessages = new DataTable();
                 //Instantiating new SqlDataAdapter
-                SqlDataAdapter daNewMessages = new SqlDataAdapter();
-                daNewMessages.SelectCommand = oCmd;
+                SqlDataAdapter daSentMessages = new SqlDataAdapter();
+                daSentMessages.SelectCommand = oCmd;
 
                 //Connection Gate
                 oCnxn.Open();
-                daNewMessages.SelectCommand.ExecuteNonQuery();
-                daNewMessages.Fill(dtSentMessages);
+                daSentMessages.SelectCommand.ExecuteNonQuery();
+                daSentMessages.Fill(dtSentMessages);
                 oCnxn.Close();
 
                 return (dtSentMessages);
+                 * */
+                #endregion History
+
+                //List<SentMessage> oSentMessages = new List<SentMessage>();
+                Dictionary<int, SentMessage> oSentMessagesNew = new Dictionary<int, SentMessage>();
+
+                SqlCommand oCmd = new SqlCommand();
+                oCmd.Connection = oCnxn;
+                oCmd.CommandType = CommandType.StoredProcedure;
+
+                oCmd.CommandText = "spSentMessagesFetchByID";
+                oCmd.Parameters.AddWithValue("@SenderID", iUserID);
+
+                oCnxn.Open();
+                SqlDataReader oReader = oCmd.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    while (oReader.Read())
+                    {
+                        SentMessage oSentMessage = new SentMessage();
+
+                        oSentMessage.MessageID = Convert.ToInt32(oReader["MessageID"]);
+                        oSentMessage.Subject = oReader["Subject"].ToString();
+                        oSentMessage.Message = oReader["Message"].ToString();
+                        oSentMessage.CreatedDate = oReader["CreatedDate"].ToString();
+                        oSentMessage.Status = Convert.ToBoolean(oReader["Status"]);
+                        oSentMessage.Recepients = oReader["Recepients"].ToString();
+                        oSentMessage.SenderID = Convert.ToInt32(oReader["SenderID"]);
+
+                        if (!ContainsKey(oSentMessage.SenderID))
+                            oSentMessagesNew.Add(oSentMessage.MessageID, oSentMessage);
+
+                            //Add(oSentMessage.MessageID, oSentMessagesNew);
+                    }
+                }
+                return oSentMessagesNew;
             }
             catch (Exception ex)
             {

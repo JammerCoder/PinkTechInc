@@ -1,11 +1,6 @@
-﻿using PinkTechCompanion;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Web;
+﻿using System;
 using System.Web.UI;
-using System.Web.UI.WebControls;
+using PinkTechCompanion;
 
 namespace PinkTechInc
 {
@@ -20,10 +15,9 @@ namespace PinkTechInc
             {
                 litLoginMessage.Text = "";
 
-                string sCnxn = ConfigurationManager.AppSettings["Cnxn"];
-                string sLogPath = ConfigurationManager.AppSettings["LogPath"];
+                Global oNewGlobal = new Global();
                 
-                User oUser = UserPermissions.Login(sCnxn, sLogPath, txtUserName.Text, txtPassword.Text);
+                User oUser = UserPermissions.Login(oNewGlobal.Cnxn(), oNewGlobal.LogPath(), txtUserName.Text, txtPassword.Text);
                 
                 if (UserPermissions.UserPermissionsReturnMessage == "SUCCESS!")
                 {
@@ -34,13 +28,13 @@ namespace PinkTechInc
                     switch (oUser.SecurityLevelName.ToUpper())
                     {
                         case "SUPERADMIN":
-                            Response.Redirect("AdminMenu.aspx?ID="+sGuid);
+                            Response.Redirect("Admin/AdminMenu.aspx?ID="+sGuid);
                             break;
                         case "ADMIN":
-                            Response.Redirect("AdminMenu.aspx?ID=" + sGuid);
+                            Response.Redirect("Admin/AdminMenu.aspx?ID=" + sGuid);
                             break;
                         default:
-                            Response.Redirect("UserHome.aspx?ID="+sGuid);
+                            Response.Redirect("Users/UserHome.aspx?ID="+sGuid);
                             break;
                     }
                 }

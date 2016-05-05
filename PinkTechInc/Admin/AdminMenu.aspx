@@ -74,7 +74,7 @@
                                     <asp:GridView ID="grdSent" runat="server" CssClass="table table-striped table-hover table-condensed" AutoGenerateColumns="False">
                                         <Columns>
                                             <asp:BoundField DataField="Subject" HeaderText="Subject" />
-                                            <asp:BoundField DataField="Sender" HeaderText="Sender" />
+                                            <asp:BoundField DataField="Recepients" HeaderText="Recepients" />
                                             <asp:BoundField DataField="CreatedDate" HeaderText="Date Sent" />
                                             <asp:BoundField DataField="Status" HeaderText="Status" />
                                         </Columns>
@@ -86,7 +86,6 @@
                 </td>
                 <td width="540" height="520"></td>
             </tr>
-
         </table>
     </div>
 </asp:Content>
