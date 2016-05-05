@@ -72,6 +72,7 @@
     <Content Include="images\background_lb.jpg" />
     <Content Include="images\background_prpl.jpg" />
     <Content Include="images\PinkTechIncHeaderImage.png" />
+    <Content Include="images\profilephoto.jpg" />
     <Content Include="Login.aspx" />
     <Content Include="PinkTechIncSiteMaster1.Master" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
