@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using PinkTechCompanion;
 
 namespace PinkTechInc
@@ -18,7 +19,10 @@ namespace PinkTechInc
             grdInbox.DataSource = oNewMessages.Values;
             grdInbox.DataBind();
 
-            grdSent.DataSource = oNewMessages.Values;
+            Messages oSentMessages = new Messages();
+            oSentMessages.SentMessages(oNewGlobal.Cnxn(), oNewGlobal.LogPath(), oUser.UserID);
+            
+            grdSent.DataSource = oSentMessages;
             grdSent.DataBind();
         }
     }

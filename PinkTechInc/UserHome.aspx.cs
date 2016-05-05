@@ -15,8 +15,14 @@ namespace PinkTechInc
             if (oNewMessages.Count > 1)
                 lblNewMessage.Text = oNewMessages.Count.ToString();
 
-            grdMessages.DataSource = oNewMessages.Values;
-            grdMessages.DataBind();
+            grdInbox.DataSource = oNewMessages.Values;
+            grdInbox.DataBind();
+
+            Messages oSentMessages = new Messages();
+            oSentMessages.SentMessages(oNewGlobal.Cnxn(), oNewGlobal.LogPath(), oUser.UserID);
+
+            grdSent.DataSource = oSentMessages.Values;
+            grdSent.DataBind();
         }
     }
 }

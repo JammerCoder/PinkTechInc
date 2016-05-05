@@ -34,7 +34,7 @@ namespace PinkTechCompanion
                     CommandType = CommandType.StoredProcedure
                 };
                 oCmd.Parameters.AddWithValue("@UserName", sUserName);
-                oCmd.Parameters.AddWithValue("@Passwrd", sPassword);
+                oCmd.Parameters.AddWithValue("@Password", sPassword);
 
                 User oUser = new User();
 
@@ -50,12 +50,12 @@ namespace PinkTechCompanion
                         oUser.LastName = oReader["LastName"].ToString();
                         oUser.UserName = oReader["UserName"].ToString();
                         oUser.Email = oReader["Email"].ToString();
-                        oUser.Passwrd = oReader["Passwrd"].ToString();
+                        oUser.Password = oReader["Password"].ToString();
                         oUser.SecurityLevelName = oReader["SecurityLevelName"].ToString();
                         oUser.IsActive = Convert.ToBoolean(oReader["IsActive"]);
                         oUser.UserID = Convert.ToInt32(oReader["UserID"]);
                     }
-                    if (oUser.UserName == sUserName && oUser.Passwrd == sPassword)
+                    if (oUser.UserName == sUserName && oUser.Password == sPassword)
                         UserPermissionsReturnMessage = "SUCCESS!";
                     else if (oUser.UserName != sUserName)
                         UserPermissionsReturnMessage = "USERNAME Failed!"; //There is problem or typographical error in UserName.
@@ -82,13 +82,13 @@ namespace PinkTechCompanion
                         oUser.LastName = oNameDataReader["LastName"].ToString();
                         oUser.UserName = oNameDataReader["UserName"].ToString();
                         oUser.Email = oNameDataReader["Email"].ToString();
-                        oUser.Passwrd = oNameDataReader["Passwrd"].ToString();
+                        oUser.Password = oNameDataReader["Password"].ToString();
                         oUser.SecurityLevelName = oNameDataReader["SecurityLevelName"].ToString();
                         oUser.IsActive = Convert.ToBoolean(oNameDataReader["IsActive"]);
                         oUser.UserID = Convert.ToInt32(oNameDataReader["UserID"]);
                     }
                     if (oNameDataReader.HasRows)
-                        UserPermissionsReturnMessage = oUser.Passwrd != sPassword ? "PASSWORD Failed!" : "SUCCESS!";
+                        UserPermissionsReturnMessage = oUser.Password != sPassword ? "PASSWORD Failed!" : "SUCCESS!";
                     else
                         UserPermissionsReturnMessage = "LOGIN Failed!"; //Both UserName and Password Fails.
                 }

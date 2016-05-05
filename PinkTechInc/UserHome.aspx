@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div>
         <table border="1">
-            <tr class="container" >
+            <tr class="container">
                 <td width="540" height="520">
                     <div>
                         <ul class="nav nav-pills">
@@ -18,14 +18,15 @@
                             <asp:Label ID="lblUserName" runat="server" /></small></strong>
                         </h2>
                         <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" href="#messages">Messages</a></li>
+                            <li class="active"><a data-toggle="tab" href="#messages">Inbox</a></li>
                             <li><a data-toggle="tab" href="#createnew">Create New</a></li>
+                            <li><a data-toggle="tab" href="#sent">Sent</a></li>
                         </ul>
 
                         <div class="tab-content">
                             <div id="messages" class="tab-pane fade in active">
                                 <div class="panel panel-body">
-                                    <asp:GridView ID="grdMessages" runat="server" CssClass="table table-striped table-hover table-condensed" AutoGenerateColumns="False">
+                                    <asp:GridView ID="grdInbox" runat="server" CssClass="table table-striped table-hover table-condensed" AutoGenerateColumns="False">
                                         <Columns>
                                             <asp:BoundField DataField="Subject" HeaderText="Subject" />
                                             <asp:BoundField DataField="Sender" HeaderText="From" />
@@ -44,7 +45,8 @@
                                                 <div class="form-group-sm">
                                                     <div class="input-group">
                                                         <asp:TextBox ID="txtRecepient" runat="server" placeholder="Recepient" CssClass="form-control" />
-                                                        <span class="input-group-btn"><asp:Button CssClass="btn btn-primary btn-sm" ID="btnSearchRecepient" runat="server" Text="..." /></span>
+                                                        <span class="input-group-btn">
+                                                            <asp:Button CssClass="btn btn-primary btn-sm" ID="btnSearchRecepient" runat="server" Text="..." /></span>
                                                     </div>
                                                     <asp:RequiredFieldValidator class="text-danger" ID="rfvRecepient" runat="server"
                                                         ErrorMessage="Recepient is required!"
@@ -65,7 +67,18 @@
                                     <div class="panel-footer">
                                         <asp:Button ID="btnSend" runat="server" Text="Send" CssClass="btn btn-xs btn-success" />
                                     </div>
-
+                                </div>
+                            </div>
+                            <div id="sent" class="tab-pane fade">
+                                <div class="panel panel-body">
+                                    <asp:GridView ID="grdSent" runat="server" CssClass="table table-striped table-hover table-condensed" AutoGenerateColumns="False">
+                                        <Columns>
+                                            <asp:BoundField DataField="Subject" HeaderText="Subject" />
+                                            <asp:BoundField DataField="Sender" HeaderText="Sender" />
+                                            <asp:BoundField DataField="CreatedDate" HeaderText="Date Sent" />
+                                            <asp:BoundField DataField="Status" HeaderText="Status" />
+                                        </Columns>
+                                    </asp:GridView>
                                 </div>
                             </div>
                         </div>

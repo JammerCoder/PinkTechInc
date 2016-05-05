@@ -74,7 +74,7 @@
                                     <asp:GridView ID="grdSent" runat="server" CssClass="table table-striped table-hover table-condensed" AutoGenerateColumns="False">
                                         <Columns>
                                             <asp:BoundField DataField="Subject" HeaderText="Subject" />
-                                            <asp:BoundField DataField="Sender" HeaderText="Recepient" />
+                                            <asp:BoundField DataField="Sender" HeaderText="Sender" />
                                             <asp:BoundField DataField="CreatedDate" HeaderText="Date Sent" />
                                             <asp:BoundField DataField="Status" HeaderText="Status" />
                                         </Columns>

@@ -58,6 +58,56 @@ namespace PinkTechCompanion
                 oCnxn.Close();
             }
         }
+
+        public DataTable SentMessages(string sCnxn, string sLogPath, int iUserID)
+        {
+            /*Moved from BookList*/
+            //Instantiating new connection object
+            SqlConnection oCnxn = new SqlConnection(sCnxn);
+
+            try
+            {
+                List<SentMessage> oSentMessages = new List<SentMessage>();
+                Dictionary<int, SentMessage> oSentMessagesNew = new Dictionary<int, SentMessage>();
+
+                #region Code Block Can be Refactored
+
+                //Instantiating Sql Command Object 
+                //Requires the Connection Information above and CommandText
+                SqlCommand oCmd = new SqlCommand();
+                oCmd.Connection = oCnxn;
+                oCmd.CommandType = CommandType.StoredProcedure;
+                #endregion
+
+                oCmd.CommandText = "spSentMessagesFetchByID";
+                oCmd.Parameters.AddWithValue("@SenderID", iUserID);
+                
+
+                //Instantiating new DataTable
+                DataTable dtSentMessages = new DataTable();
+                //Instantiating new SqlDataAdapter
+                SqlDataAdapter daNewMessages = new SqlDataAdapter();
+                daNewMessages.SelectCommand = oCmd;
+
+                //Connection Gate
+                oCnxn.Open();
+                daNewMessages.SelectCommand.ExecuteNonQuery();
+                daNewMessages.Fill(dtSentMessages);
+                oCnxn.Close();
+
+                return (dtSentMessages);
+            }
+            catch (Exception ex)
+            {
+                Log oLog = new Log();
+                oLog.LogError("SentMessages: ", ex.Message, sLogPath);
+                return null;
+            }
+            finally
+            {
+                oCnxn.Close();
+            }
+        }
     }
 
     public class Message
@@ -71,4 +121,19 @@ namespace PinkTechCompanion
         public bool Status { get; set; }
         #endregion Properties
     }
+    public class SentMessage
+    {
+        #region Properties
+
+        public int MessageID { get; set; }
+        public int SenderID { get; set; }
+        public string Subject { get; set; }
+        public string Message { get; set; }
+        public string Recepients { get; set; }
+        public string CreatedDate { get; set; }
+        public bool Status { get; set; }
+        #endregion Properties
+    }
+
+
 }
