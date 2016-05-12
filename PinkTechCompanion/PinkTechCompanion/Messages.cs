@@ -100,8 +100,7 @@ namespace PinkTechCompanion
                 return (dtSentMessages);
                  * */
                 #endregion History
-
-                //List<SentMessage> oSentMessages = new List<SentMessage>();
+                
                 Dictionary<int, SentMessage> oSentMessagesNew = new Dictionary<int, SentMessage>();
 
                 SqlCommand oCmd = new SqlCommand();
@@ -160,6 +159,7 @@ namespace PinkTechCompanion
         public bool Status { get; set; }
         #endregion Properties
     }
+
     public class SentMessage
     {
         #region Properties
@@ -174,5 +174,13 @@ namespace PinkTechCompanion
         #endregion Properties
     }
 
+    public class UserMessage
+    {
+        #region Properties
+
+        public int UserID { get; set; }
+        public int MessageID { get; set; }
+        #endregion Properties
+    }
 
 }

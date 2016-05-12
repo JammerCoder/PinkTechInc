@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Web.UI.WebControls;
 using PinkTechCompanion;
 
 namespace PinkTechInc
@@ -30,6 +31,45 @@ namespace PinkTechInc
             
             grdSent.DataSource = oSentMessages.Values;
             grdSent.DataBind();
+
+            Users oUsers = new Users(oNewGlobal.Cnxn(), oNewGlobal.LogPath(),oUser.UserID);
+
+            /*drdRecepient.DataSource = oUsers.Values;
+            drdRecepient.DataTextField = "UserName";
+            drdRecepient.DataValueField = "UserID";
+            drdRecepient.DataBind();
+            drdRecepient.Items.Insert(0, "-Select-");*/
+
+            lstRecepient.DataSource = oUsers.Values;
+            lstRecepient.DataTextField = "UserName";
+            lstRecepient.DataValueField = "UserID";
+            lstRecepient.DataBind();
+        }
+
+        protected void btnSend_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string selected = lstRecepient.SelectedValue;
+
+            }
+            catch (Exception ex)
+            {
+                txtSubject.Text = ex.Message;
+            }
+        }
+
+        protected void lstRecepient_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                litErrorMessages.Text = lstRecepient.SelectedItem.ToString();
+
+            }
+            catch (Exception ex)
+            {
+                litErrorMessages.Text = ex.Message;
+            }
         }
     }
 }

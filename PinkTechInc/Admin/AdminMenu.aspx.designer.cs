@@ -85,22 +85,13 @@ namespace PinkTechInc {
         protected global::System.Web.UI.WebControls.GridView grdInbox;
         
         /// <summary>
-        /// txtRecepient control.
+        /// lstRecepient control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRecepient;
-        
-        /// <summary>
-        /// btnSearchRecepient control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearchRecepient;
+        protected global::System.Web.UI.WebControls.ListBox lstRecepient;
         
         /// <summary>
         /// rfvRecepient control.
@@ -137,6 +128,15 @@ namespace PinkTechInc {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSend;
+        
+        /// <summary>
+        /// litErrorMessages control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litErrorMessages;
         
         /// <summary>
         /// grdSent control.

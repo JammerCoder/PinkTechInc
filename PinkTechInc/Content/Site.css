@@ -139,8 +139,13 @@ table td{
 }
 
 /* Toggle Styles */
+.dropmenuScroll
+{
+  max-height: 100%;
+  overflow: auto;
+}
 
-
+/*position:absolute;*/
 /* Sidebar Styles */
 
 

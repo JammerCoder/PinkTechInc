@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PinkTechIncSiteMaster1.Master" AutoEventWireup="true" CodeBehind="AdminMenu.aspx.cs" Inherits="PinkTechInc.AdminMenu" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script>
+        
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container-fluid">
@@ -34,13 +37,17 @@
                                         </div>
                                         <div class="col-sm-9">
                                             <p class="page-header">
-                                                Name: <strong><asp:Literal ID="litAccountName" runat="server" /></strong>
+                                                Name: <strong>
+                                                    <asp:Literal ID="litAccountName" runat="server" /></strong>
                                                 <br />
-                                                Address: <strong><asp:Literal ID="litAddress" runat="server" /></strong>
+                                                Address: <strong>
+                                                    <asp:Literal ID="litAddress" runat="server" /></strong>
                                                 <br />
-                                                Contact Info: <strong><asp:Literal ID="litContact" runat="server" /></strong>
+                                                Contact Info: <strong>
+                                                    <asp:Literal ID="litContact" runat="server" /></strong>
                                                 <br />
-                                                Role: <strong><asp:Literal ID="litRole" runat="server" /></strong>
+                                                Role: <strong>
+                                                    <asp:Literal ID="litRole" runat="server" /></strong>
                                                 <br />
                                             </p>
                                         </div>
@@ -74,20 +81,17 @@
                                         <form>
                                             <div class="input-group-sm">
                                                 <div class="form-group-sm">
-                                                    <div class="input-group">
-                                                        <asp:TextBox ID="txtRecepient" runat="server" placeholder="Recepient" CssClass="form-control" />
-                                                        <span class="input-group-btn">
-                                                            <asp:Button CssClass="btn btn-primary btn-sm" ID="btnSearchRecepient" runat="server" Text="..." /></span>
-                                                    </div>
+                                                    <asp:ListBox ID="lstRecepient" runat="server" CssClass="form-control" Rows="3" OnSelectedIndexChanged="lstRecepient_OnSelectedIndexChanged" />
                                                     <asp:RequiredFieldValidator class="text-danger" ID="rfvRecepient" runat="server"
                                                         ErrorMessage="Recepient is required!"
-                                                        ControlToValidate="txtRecepient"></asp:RequiredFieldValidator>
+                                                        ControlToValidate="lstRecepient"></asp:RequiredFieldValidator>
                                                 </div>
                                                 <div class="form-group-sm">
                                                     <asp:TextBox class="form-control" ID="txtSubject" runat="server" placeholder="Subject" />
                                                     <asp:RequiredFieldValidator class="text-danger" ID="rfvSubject" runat="server"
                                                         ErrorMessage="Subject is required!"
                                                         ControlToValidate="txtSubject"></asp:RequiredFieldValidator>
+                                                        
                                                 </div>
                                                 <div class="form-group-sm">
                                                     <textarea class="form-control" id="txtMessageArea" rows="7" required="required" spellcheck="True"></textarea>
@@ -96,7 +100,8 @@
                                         </form>
                                     </div>
                                     <div class="panel-footer">
-                                        <asp:Button ID="btnSend" runat="server" Text="Send" CssClass="btn btn-xs btn-success" />
+                                        <span><asp:Button ID="btnSend" runat="server" Text="Send" CssClass="btn btn-xs btn-success"  OnClick="btnSend_Click" UseSubmitBehavior="False" /></span>
+                                        <span><asp:Literal ID="litErrorMessages" runat="server" /></span>
                                     </div>
                                 </div>
                             </div>
