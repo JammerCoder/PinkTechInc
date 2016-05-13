@@ -10,51 +10,60 @@
 namespace PinkTechInc.Admin {
     
     
-    public partial class AdminMenu {
+    public partial class SendMessage {
         
         /// <summary>
-        /// imgProfilePhoto control.
+        /// lstRecepient control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgProfilePhoto;
+        protected global::System.Web.UI.WebControls.ListBox lstRecepient;
         
         /// <summary>
-        /// litAccountName control.
+        /// rfvRecepient control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litAccountName;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvRecepient;
         
         /// <summary>
-        /// litAddress control.
+        /// txtSubject control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litAddress;
+        protected global::System.Web.UI.WebControls.TextBox txtSubject;
         
         /// <summary>
-        /// litContact control.
+        /// rfvSubject control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litContact;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvSubject;
         
         /// <summary>
-        /// litRole control.
+        /// btnSend control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litRole;
+        protected global::System.Web.UI.WebControls.Button btnSend;
+        
+        /// <summary>
+        /// litErrorMessages control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litErrorMessages;
     }
 }

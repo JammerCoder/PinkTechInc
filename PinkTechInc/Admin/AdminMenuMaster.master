@@ -1,0 +1,25 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/LoginLandingMaster.master" AutoEventWireup="true" CodeBehind="AdminMenuMaster.master.cs" Inherits="PinkTechInc.Admin.AdminMenuMaster" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="container-fluid">
+        <table border="1">
+            <tr class="container">
+                <td width="540" height="520">
+                    <div>
+                        <ul class="nav nav-pills">
+                            <li><a class="disabled" href="#">Tasks</a></li>
+                            <li><a class="" href="/Admin/Inbox.aspx?ID=<%=Request.QueryString["ID"].ToString() %>"><i class="glyphicon glyphicon-envelope"></i>Messages<asp:Label ID="lblNewMessage" runat="server" CssClass="badge alert-danger" /></a></li>
+                        </ul>
+                    </div>
+                    <div class="container-fluid">
+                        <h2 class="page-header">Welcome <strong><small>
+                            <asp:Label ID="lblUserName" runat="server" /></small></strong>
+                        </h2>
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+                    </div>
+                </td>
+                <td width="540" height="520">The Right Content goes here...</td>
+                <!--Right Side of the AdminMenu-->
+            </tr>
+        </table>
+    </div>
+</asp:Content>

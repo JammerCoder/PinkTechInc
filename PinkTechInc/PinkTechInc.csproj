@@ -62,6 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin\AdminMenu.aspx" />
+    <Content Include="Admin\Inbox.aspx" />
+    <Content Include="Admin\Outbox.aspx" />
+    <Content Include="Admin\SendMessage.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -83,6 +86,8 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="LoginLandingMaster.master" />
+    <Content Include="Admin\AdminMenuMaster.master" />
     <None Include="Scripts\jquery-2.2.3.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -111,6 +116,34 @@
     <Compile Include="Admin\AdminMenu.aspx.designer.cs">
       <DependentUpon>AdminMenu.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\AdminMenuMaster.master.cs">
+      <DependentUpon>AdminMenuMaster.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\AdminMenuMaster.master.designer.cs">
+      <DependentUpon>AdminMenuMaster.master</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Inbox.aspx.cs">
+      <DependentUpon>Inbox.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Inbox.aspx.designer.cs">
+      <DependentUpon>Inbox.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Outbox.aspx.cs">
+      <DependentUpon>Outbox.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Outbox.aspx.designer.cs">
+      <DependentUpon>Outbox.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\SendMessage.aspx.cs">
+      <DependentUpon>SendMessage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\SendMessage.aspx.designer.cs">
+      <DependentUpon>SendMessage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.cs" />
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
@@ -125,6 +158,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoginLandingMaster.master.cs">
+      <DependentUpon>LoginLandingMaster.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoginLandingMaster.master.designer.cs">
+      <DependentUpon>LoginLandingMaster.master</DependentUpon>
     </Compile>
     <Compile Include="PinkTechIncSiteMaster1.Master.cs">
       <DependentUpon>PinkTechIncSiteMaster1.Master</DependentUpon>

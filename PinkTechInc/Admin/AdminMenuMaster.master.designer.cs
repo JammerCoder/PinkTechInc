@@ -10,51 +10,33 @@
 namespace PinkTechInc.Admin {
     
     
-    public partial class AdminMenu {
+    public partial class AdminMenuMaster {
         
         /// <summary>
-        /// imgProfilePhoto control.
+        /// lblNewMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgProfilePhoto;
+        protected global::System.Web.UI.WebControls.Label lblNewMessage;
         
         /// <summary>
-        /// litAccountName control.
+        /// lblUserName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litAccountName;
+        protected global::System.Web.UI.WebControls.Label lblUserName;
         
         /// <summary>
-        /// litAddress control.
+        /// ContentPlaceHolder1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litAddress;
-        
-        /// <summary>
-        /// litContact control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litContact;
-        
-        /// <summary>
-        /// litRole control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litRole;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
     }
 }

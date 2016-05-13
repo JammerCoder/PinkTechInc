@@ -34,7 +34,7 @@ namespace PinkTechInc
                             Response.Redirect("Admin/AdminMenu.aspx?ID=" + sGuid);
                             break;
                         default:
-                            Response.Redirect("Users/UserHome.aspx?ID="+sGuid);
+                            Response.Redirect("Users/AdminMenu.aspx?ID="+sGuid);
                             break;
                     }
                 }

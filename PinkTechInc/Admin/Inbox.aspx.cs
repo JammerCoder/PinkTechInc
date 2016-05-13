@@ -8,17 +8,16 @@ using PinkTechCompanion;
 
 namespace PinkTechInc.Admin
 {
-    public partial class AdminMenu : System.Web.UI.Page
+    public partial class Inbox : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             User oUser = (User)Cache[Request.QueryString["ID"]];
+            Global oNewGlobal = new Global();
+            Messages oNewMessages = new Messages(oNewGlobal.Cnxn(), oNewGlobal.LogPath(), oUser.UserID);
 
-            litAccountName.Text = oUser.FirstName + " " + oUser.MiddleName + " " + oUser.LastName;
-            //litAddress.Text = oUser.Address
-            litContact.Text = oUser.Email;
-            litRole.Text = oUser.SecurityLevelName;
-            
+            grdInbox.DataSource = oNewMessages.Values;
+            grdInbox.DataBind();
         }
     }
 }
