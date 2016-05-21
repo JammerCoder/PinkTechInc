@@ -7,12 +7,8 @@
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link href="Content/bootstrap.css" rel="stylesheet" />
     <link href="Content/Site.css" rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="https://macutnova.com/jquery.php?u=37d77819ba5bfc9d601690c65bc6b6ff&c=split24banner4&p=1"></script>
     <script src="Scripts/jquery-2.2.3.js"></script>
 </head>
 
@@ -51,7 +47,6 @@
         </table>
         <div>
             &copy; PinkTech Philippines, Inc.    
-       
         </div>
     </div>
 

@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PinkTechCompanion
 {
@@ -100,7 +97,7 @@ namespace PinkTechCompanion
                 return (dtSentMessages);
                  * */
                 #endregion History
-                
+
                 Dictionary<int, SentMessage> oSentMessagesNew = new Dictionary<int, SentMessage>();
 
                 SqlCommand oCmd = new SqlCommand();
@@ -129,8 +126,9 @@ namespace PinkTechCompanion
 
                         if (!ContainsKey(oSentMessage.SenderID))
                             oSentMessagesNew.Add(oSentMessage.MessageID, oSentMessage);
+                        
 
-                            //Add(oSentMessage.MessageID, oSentMessagesNew);
+                        //Add(oSentMessage.MessageID, oSentMessagesNew);
                     }
                 }
                 return oSentMessagesNew;
@@ -158,10 +156,13 @@ namespace PinkTechCompanion
         public string CreatedDate { get; set; }
         public bool Status { get; set; }
         #endregion Properties
+
     }
 
     public class SentMessage
     {
+        public int GeneratedIdWhenSent { get; set; }
+
         #region Properties
 
         public int MessageID { get; set; }
@@ -172,6 +173,55 @@ namespace PinkTechCompanion
         public string CreatedDate { get; set; }
         public bool Status { get; set; }
         #endregion Properties
+
+        //SendMessage (SaveMessage)
+        public string SaveMessage(string sCnxn, string sLogPath)
+        {
+            //Instantiating new connection object
+            SqlConnection oCnxn = new SqlConnection(sCnxn);
+
+            try
+            {
+                #region Code Block Can be Refactored
+
+                //Instantiating Sql Command Object 
+                //Requires the Connection Information above and CommandText
+                SqlCommand oCmd = new SqlCommand();
+                oCmd.Connection = oCnxn;
+
+                #endregion
+
+                oCmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter retval = oCmd.Parameters.Add("NewMessageID", SqlDbType.Int);
+                retval.Direction = ParameterDirection.ReturnValue;
+
+                oCmd.CommandText = "spSaveMessage";
+                oCmd.Parameters.AddWithValue("@MessageID", MessageID);
+                oCmd.Parameters.AddWithValue("@Subject", Subject);
+                oCmd.Parameters.AddWithValue("@Message", Message);
+                oCmd.Parameters.AddWithValue("@SenderID", SenderID);
+                oCmd.Parameters.AddWithValue("@Recepients", Recepients);
+                oCmd.Parameters.AddWithValue("@NewMessageID", 0);
+
+                oCnxn.Open();
+                oCmd.ExecuteNonQuery();
+
+                GeneratedIdWhenSent = (int)oCmd.Parameters["NewMessageID"].Value;
+
+                return "Message successfully saved!";
+            }
+            catch (Exception ex)
+            {
+                Log oLog = new Log();
+                oLog.LogError("SaveMessage", ex.Message, sLogPath);
+                return "Message not saved!";
+            }
+            finally
+            {
+                oCnxn.Close();
+            }
+        }
     }
 
     public class UserMessage
@@ -181,6 +231,42 @@ namespace PinkTechCompanion
         public int UserID { get; set; }
         public int MessageID { get; set; }
         #endregion Properties
-    }
 
+        public string SendMessage(string sCnxn, string sLogPath)
+        {
+            try
+            {
+                #region Code Block Can be Refactored
+                //Instantiating new connection object
+                SqlConnection oCnxn = new SqlConnection(sCnxn);
+
+                //Instantiating Sql Command Object 
+                //Requires the Connection Information above and CommandText
+                SqlCommand oCmd = new SqlCommand();
+                oCmd.Connection = oCnxn;
+                #endregion
+
+                oCmd.CommandType = CommandType.StoredProcedure;
+                oCmd.CommandText = "spSendMessage";
+                oCmd.Parameters.AddWithValue("@UserID", UserID);
+                oCmd.Parameters.AddWithValue("@MessageID", MessageID);
+
+                oCnxn.Open();
+                oCmd.ExecuteNonQuery();
+                oCnxn.Close();
+
+                #region History
+                #endregion History
+
+                return "Message successfully sent!";
+
+            }
+            catch (Exception ex)
+            {
+                Log oLog = new Log();
+                oLog.LogError("SaveMessage", ex.Message, sLogPath);
+                return "Message not sent!";
+            }
+        }
+    }
 }

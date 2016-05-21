@@ -28,7 +28,7 @@ namespace PinkTechCompanion
 
                 FileStream fs = new FileStream(LogPath + "ErrorLog.txt", oMode, FileAccess.Write);
                 StreamWriter wr = new StreamWriter(fs);
-                string sMsg = "ERROR IN" + Source + "on" + DateTime.Now + ": " + ErrMsg + Environment.NewLine;
+                string sMsg = "ERROR IN " + Source + " on " + DateTime.Now + ": " + ErrMsg + Environment.NewLine;
                 wr.Write(sMsg);
                 wr.Close();
 
